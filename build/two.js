@@ -11176,6 +11176,8 @@ SOFTWARE.
       }
     }
 
+    if (Object.keys(node.dataset).length) elem.dataset = node.dataset;
+
     return styles;
 
   };
@@ -11333,6 +11335,8 @@ SOFTWARE.
           }
         }
       }
+
+      if (group.classList.length > 0) group._flagClassName = true;
 
       return group;
 
@@ -14237,7 +14241,7 @@ SOFTWARE.
       },
 
       render: function(domElement) {
-
+     
         // Shortcut for hidden objects.
         // Doesn't reset the flags, so changes are stored and
         // applied once the object is visible again
@@ -14326,6 +14330,12 @@ SOFTWARE.
             this._renderer.elem.setAttribute('clip-path', 'url(#' + this._mask.id + ')');
           } else {
             this._renderer.elem.removeAttribute('clip-path');
+          }
+        }
+
+        if (this.dataset) {
+          for (var key in this.dataset) {
+            this._renderer.elem.setAttribute('data-' + key, this.dataset[key]);
           }
         }
 
